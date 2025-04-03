@@ -1,4 +1,6 @@
-import com.amazonaws.client.builder.AwsClientBuilder;
+package Task1;
+
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
@@ -12,10 +14,8 @@ public class MusicCreateTable {
         public static void main(String[] args) throws Exception {
 
             AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                    .withEndpointConfiguration(
-                            new AwsClientBuilder.EndpointConfiguration(
-                                    "http://localhost:8000",
-                                    Regions.US_EAST_1.getName()))
+                    .withCredentials(new ProfileCredentialsProvider())
+                    .withRegion(Regions.US_EAST_1)
                     .build();
 
             DynamoDB dynamoDB = new DynamoDB(client);
