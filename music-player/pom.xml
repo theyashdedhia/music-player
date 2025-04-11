@@ -15,12 +15,30 @@
     </properties>
 
     <dependencies>
+        <!-- Your existing AWS SDK dependency -->
         <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk</artifactId>
             <version>1.12.546</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- Spring Boot Starter Web (add this) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.7.18</version> <!-- Last Spring Boot 2.x version supporting Java 8 -->
+        </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <!-- Add Spring Boot Maven Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.18</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>

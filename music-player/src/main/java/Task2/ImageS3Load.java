@@ -28,7 +28,7 @@ import java.net.URLConnection;
 import java.util.Iterator;
 
 public class ImageS3Load {
-    static String BUCKET_NAME = "task2-music-images";
+    static String BUCKET_NAME = "task2-music-images-bucket";
     public static void main(String[] args) throws IOException {
         Regions clientRegion = Regions.US_EAST_1;
 

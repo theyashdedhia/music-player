@@ -27,7 +27,7 @@ public class LoginDataLoad {
 
             Table table = dynamoDB.getTable("login");
 
-            JsonParser parser = new JsonFactory().createParser(new File("data/loginData.json"));
+            JsonParser parser = new JsonFactory().createParser(new File("C:\\Users\\Yash\\Desktop\\LearningInPublic\\Sem 3\\Cloud\\music-player\\music-player\\data\\loginData.json"));
 
             JsonNode rootNode = new ObjectMapper().readTree(parser);
             Iterator<JsonNode> iteratorForJsonData = rootNode.iterator();

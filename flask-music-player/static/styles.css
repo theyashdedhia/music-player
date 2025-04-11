@@ -1,0 +1,244 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+/* Form Styles */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: #e74c3c;
+    background-color: #fadbd8;
+    border: 1px solid #e74c3c;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Login/Register Pages */
+.container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* User Area */
+.user-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.logout-link {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.logout-link:hover {
+    background-color: #c0392b;
+    text-decoration: none;
+}
+
+/* Subscription Area */
+.subscription-area, .query-area {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.songs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.song-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.song-info {
+    flex-grow: 1;
+    margin-bottom: 10px;
+}
+
+.song-info h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.song-info p {
+    margin: 5px 0;
+}
+
+.song-image {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.song-image img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.song-image p {
+    flex-grow: 1;
+    margin: 0;
+    padding-bottom: 5px;
+    font-style: italic;
+    color: #555;
+}
+
+.remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.remove-btn:hover {
+    background-color: #c0392b;
+}
+
+.subscribe-btn {
+    background-color: #2ecc71;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.subscribe-btn:hover {
+    background-color: #27ae60;
+}
+
+.no-songs, .no-results {
+    text-align: center;
+    color: #7f8c8d;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+/* Query Area */
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.query-btn {
+    background-color: #3498db;
+    color: white;
+    grid-column: span 2;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.query-btn:hover {
+    background-color: #2980b9;
+}
+
+.search-results h3 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .query-btn {
+        grid-column: span 1;
+    }
+    
+    .songs {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .song-image {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .song-image img {
+        width: 60px;
+        height: 60px;
+    }
+}

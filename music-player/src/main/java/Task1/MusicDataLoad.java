@@ -28,7 +28,7 @@ public class MusicDataLoad {
 
             Table table = dynamoDB.getTable("music");
 
-            JsonParser parser = new JsonFactory().createParser(new File("data/2025a1.json"));
+            JsonParser parser = new JsonFactory().createParser(new File("C:\\Users\\Yash\\Desktop\\LearningInPublic\\Sem 3\\Cloud\\music-player\\music-player\\data\\2025a1.json"));
 
             JsonNode rootNode = new ObjectMapper().readTree(parser);
             Iterator<JsonNode> iteratorForJsonData = rootNode.get("songs").iterator();
