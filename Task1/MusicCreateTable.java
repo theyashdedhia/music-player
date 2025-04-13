@@ -10,6 +10,10 @@ import com.amazonaws.services.dynamodbv2.model.*;
 
 import java.util.Arrays;
 
+/**
+ * MusicCreateTable class is used to create the music table on the DynamoDB.
+ * Reference: Exercise 4: AWS Database Services
+ */
 public class MusicCreateTable {
         public static void main(String[] args) throws Exception {
 

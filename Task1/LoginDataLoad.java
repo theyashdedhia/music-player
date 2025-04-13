@@ -15,6 +15,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+
+/**
+ * LoginDataLoad class loads the data of login users dynamically created in loginData.json to login table.
+ * Reference: Exercise 4: AWS Database Services
+ */
 public class LoginDataLoad {
         public static void main(String[] args) throws Exception {
 
@@ -27,6 +32,7 @@ public class LoginDataLoad {
 
             Table table = dynamoDB.getTable("login");
 
+            // Creating the parser for loginData.json file
             JsonParser parser = new JsonFactory().createParser(new File("data/loginData.json"));
 
             JsonNode rootNode = new ObjectMapper().readTree(parser);
@@ -34,6 +40,7 @@ public class LoginDataLoad {
 
             ObjectNode currentNode;
 
+            // Iterating each entry in the json file and uploading it into the login table.
             while (iteratorForJsonData.hasNext()) {
                 currentNode = (ObjectNode) iteratorForJsonData.next();
 

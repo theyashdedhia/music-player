@@ -13,6 +13,11 @@ import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
 import com.amazonaws.services.dynamodbv2.model.KeyType;
 import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
 import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType;
+
+/**
+ * LoginCreateTable class is used to create the login table on the DynamoDB.
+ * Reference: Exercise 4: AWS Database Services
+ */
 public class LoginCreateTable {
         public static void main(String[] args) throws Exception {
 

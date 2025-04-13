@@ -27,12 +27,18 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Iterator;
 
+/**
+ * ImageS3Load class downloads the images from the urls added in music table and
+ * stores the image into s3 bucket.
+ *
+ * Reference: Exercise 3: AWS Storage Services
+ */
 public class ImageS3Load {
     static String BUCKET_NAME = "task2-music-images";
     public static void main(String[] args) throws IOException {
         Regions clientRegion = Regions.US_EAST_1;
 
-
+        // Creating the s3 bucket and printing its location for validation of the bucket existence.
         try {
             AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
                     .withCredentials(new ProfileCredentialsProvider())
@@ -52,19 +58,20 @@ public class ImageS3Load {
                 System.out.println("Bucket location: " + bucketLocation);
             }
 
-            // Connect to Db
+            // Connect to DynamoDB for fecthing the image urls
             AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
                     .withCredentials(new ProfileCredentialsProvider())
                     .withRegion(Regions.US_EAST_1)
                     .build();
-
             DynamoDB dynamoDB = new DynamoDB(client);
             Table table = dynamoDB.getTable("music");
+
             // Get the images url data
             ScanSpec scanSpec = new ScanSpec().withProjectionExpression("img_url");
             ItemCollection<ScanOutcome> items = table.scan(scanSpec);
+
+            // upload one by one on the bucket based on the items
             uploadAllImages(items, s3Client);
-            // upload one by one on the bucket
         } catch (AmazonServiceException e) {
             e.printStackTrace();
         } catch (SdkClientException e) {
@@ -72,6 +79,12 @@ public class ImageS3Load {
         }
     }
 
+    /**
+     * Downloads and uploads the images based on the urls returned in items from the scan using s3client object.
+     *
+     * @param items
+     * @param s3Client
+     */
     private static void uploadAllImages(ItemCollection<ScanOutcome> items, AmazonS3 s3Client) {
         try {
             System.out.println("Fetching all img_url from music table...");
@@ -99,27 +112,42 @@ public class ImageS3Load {
         }
     }
 
+    /**
+     * Upload the image data in input stream in s3client using http connect and image name as extracted from imgurl.
+     *
+     * @param s3Client
+     * @param inputStream
+     * @param connection
+     * @param imgUrl
+     */
     private static void uploadToS3(AmazonS3 s3Client, InputStream inputStream, HttpURLConnection connection, String imgUrl) {
         try {
-            // Set metadata
+            // Setting metadata
             ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentType("image/jpeg"); // Adjust based on file type
+            metadata.setContentType("image/jpeg"); // selecting jpeg based on the urls in the table
             metadata.setContentLength(connection.getContentLengthLong());
 
-            //extract file name
+            //extracting file name
             String s3Key = "images/" + extractFileName(imgUrl);
 
-            // Upload to S3 directly from InputStream
+            // Uploading to S3 directly from InputStream
             s3Client.putObject(new PutObjectRequest(BUCKET_NAME, s3Key, inputStream, metadata));
 
             System.out.println("Upload successful: " + s3Key);
 
-            // Close InputStream
+            // Closing InputStream
             inputStream.close();
         } catch (Exception e) {
             System.err.println("Failed to upload to S3: " + e.getMessage());
         }
     }
+
+    /**
+     * Extracts and returns the name of the image from the url.
+     *
+     * @param imageUrl
+     * @return
+     */
     public static String extractFileName(String imageUrl) {
         return imageUrl.substring(imageUrl.lastIndexOf("/") + 1);
     }

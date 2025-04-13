@@ -16,6 +16,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.File;
 import java.util.Iterator;
 
+/**
+ * MusicDataLoad class loads the data of music albums dynamically from 2025a1.json to music table.
+ * Reference: Exercise 4: AWS Database Services
+ */
 public class MusicDataLoad {
         public static void main(String[] args) throws Exception {
 
@@ -35,6 +39,7 @@ public class MusicDataLoad {
 
             ObjectNode currentNode;
 
+            // Loop iterating the data from the 2025a1.json file to the music table
             while (iteratorForJsonData.hasNext()) {
                 currentNode = (ObjectNode) iteratorForJsonData.next();
 
