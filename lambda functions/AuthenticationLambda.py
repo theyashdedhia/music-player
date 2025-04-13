@@ -2,9 +2,12 @@ import json
 import boto3
 from boto3.dynamodb.conditions import Key
 
+#This code is referred from the AWS documentation and week 5 tutorial pdf
+
 dynamodb = boto3.resource('dynamodb')
 login_table = dynamodb.Table('login')
 
+# Checks the operation type and calls the appropriate function
 def lambda_handler(event, context):
     operation = event.get('path', '').split('/')[-1]
     
@@ -21,6 +24,7 @@ def lambda_handler(event, context):
             })
         }
 
+# Handles the login operation
 def handle_login(event):
     body = json.loads(event.get('body', '{}'))
     email = body.get('email')
@@ -65,6 +69,7 @@ def handle_login(event):
             })
         }
 
+# Handles the registration operation
 def handle_register(event):
     body = json.loads(event.get('body', '{}'))
     email = body.get('email')

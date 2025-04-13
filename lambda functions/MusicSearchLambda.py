@@ -2,12 +2,15 @@ import json
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 
+#This code is referred from the AWS documentation and week 5 tutorial pdf
+
 dynamodb = boto3.resource('dynamodb')
 s3 = boto3.client('s3')
 music_table = dynamodb.Table('music')
 
 S3_BUCKET = 'task2-music-images-bucket'  
 
+# Get the music using scan queries 
 def lambda_handler(event, context):
     body = json.loads(event.get('body', '{}'))
     title = body.get('title', '')

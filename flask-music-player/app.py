@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import requests
-import json
-import os
 
 app = Flask(__name__)
 app.secret_key = "music_app_secret_key"
 
-# API Gateway base URL
+# This is the url of the apigateway that is used to call the lambda functions
 API_BASE_URL = "https://wcq2xxnso7.execute-api.us-east-1.amazonaws.com/prod"
 
 # Routes
@@ -14,7 +12,7 @@ API_BASE_URL = "https://wcq2xxnso7.execute-api.us-east-1.amazonaws.com/prod"
 def home():
     if 'email' in session:
         return redirect(url_for('main'))
-    return redirect(url_for('login'))
+    return redirect(url_for('login')) #default is login screen if there is no session
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

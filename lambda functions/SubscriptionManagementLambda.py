@@ -3,13 +3,15 @@ import boto3
 import decimal
 from boto3.dynamodb.conditions import Key, Attr
 
+#This code is referred from the AWS documentation and week 5 tutorial pdf
+
 dynamodb = boto3.resource('dynamodb')
 s3 = boto3.client('s3')
 subscription_table = dynamodb.Table('subscription')
 
 S3_BUCKET = 'task2-music-images-bucket' 
 
-
+# DecimalEncoder is used to convert decimal values to int or float for JSON serialization
 class DecimalEncoder(json.JSONEncoder):
     def default(self, o):
         if isinstance(o, decimal.Decimal):
@@ -19,6 +21,7 @@ class DecimalEncoder(json.JSONEncoder):
                 return int(o)
         return super(DecimalEncoder, self).default(o)
 
+# Checks the operation type and calls the appropriate function
 def lambda_handler(event, context):
     http_method = event.get('httpMethod', '')
     path = event.get('path', '').split('/')[-1]
@@ -38,6 +41,7 @@ def lambda_handler(event, context):
             })
         }
 
+# Handles the GET request to fetch subscriptions
 def get_subscriptions(event):
     query_params = event.get('queryStringParameters', {}) or {}
     email = query_params.get('email')
@@ -96,6 +100,7 @@ def get_subscriptions(event):
             })
         }
 
+# Handles the POST request to add a subscription
 def add_subscription(event):
     body = json.loads(event.get('body', '{}'))
     email = body.get('email')
@@ -155,6 +160,7 @@ def add_subscription(event):
             })
         }
 
+# Handles the DELETE request to remove a subscription
 def remove_subscription(event):
     body = json.loads(event.get('body', '{}'))
     email = body.get('email')
