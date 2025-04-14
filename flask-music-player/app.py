@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = "music_app_secret_key"
 
 # This is the url of the apigateway that is used to call the lambda functions
-API_BASE_URL = "https://wcq2xxnso7.execute-api.us-east-1.amazonaws.com/prod"
+API_BASE_URL = "not sharing this lol"
 
 # Routes
 @app.route("/")
